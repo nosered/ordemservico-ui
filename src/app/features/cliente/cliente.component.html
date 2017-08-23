@@ -1,0 +1,82 @@
+<main id="content" class="content" role="main">
+    <!--h1 class="page-title">Clientes <small><small>The Lucky One</small></small></h1-->
+    <ol class="breadcrumb">
+        <li>HOME</li>
+        <li class="active">CLIENTES</li>
+    </ol>
+    <div class="row">
+            <div class="col-md-12">
+                <section class="widget">
+                    <header>
+                        <h4>
+                            Lista de <span class="fw-semi-bold">Clientes</span>
+                        </h4>
+                        <div class="widget-controls">
+                            <!--a href="#"><i class="glyphicon glyphicon-cog"></i></a>
+                            <a data-widgster="close" href="#"><i class="glyphicon glyphicon-remove"></i></a-->
+                            <div class="input-group" style="width: 500px;">
+                                <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+                                <input type="text" [(ngModel)]="filterQuery" class="form-control pull-right" placeholder="Filtrar cliente por nome">
+                            </div>
+                        </div>
+                    </header>
+                    <div class="widget-body">
+                        <table class="table table-bordered table-hover"
+                        [mfData]="data | clienteFilter : filterQuery"
+                        #mf="mfDataTable"
+                        [mfRowsOnPage]="3">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25%">
+                                        <mfDefaultSorter by="nome">Nome</mfDefaultSorter>
+                                    </th>
+                                    <th style="width: 15%">Telefone</th>
+                                    <th style="width: 45%">Endereço</th>
+                                    <th style="width: 25%">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cliente of mf.data">
+                                    <td>{{ cliente.nome }}</td>
+                                    <td>{{ cliente.telefone }}</td>
+                                    <td>{{ cliente.endereco?.logradouro }}</td>
+                                    <td>
+                                        <a class="btn btn-default"><i style="color: green" class="fa fa-edit"></i></a>
+                                        <a class="btn btn-default"><i style="color: red" class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4">
+                                        <mfBootstrapPaginator></mfBootstrapPaginator>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <!--div class="clearfix">
+                            <div class="pull-right">
+                                <button class="btn btn-default btn-sm">
+                                    Send to ...
+                                </button>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-inverse dropdown-toggle" data-toggle="dropdown">
+                                        &nbsp; Clear &nbsp;
+                                        <i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#">Clear</a></li>
+                                        <li><a href="#">Move ...</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p>Basic table with styled content</p>
+                        </div-->
+                    </div>
+                </section>
+            </div>
+        </div>
+</main>
