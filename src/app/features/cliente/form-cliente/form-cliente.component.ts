@@ -11,6 +11,13 @@ import { ClienteService } from '../cliente.service';
   styleUrls: ['./form-cliente.component.css']
 })
 export class FormClienteComponent implements OnInit, OnDestroy {
+  
+  cpfMask = [ /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/ ];
+  foneMask = [ '(', /[1-9]/, /\d/, ')', ' ', /[1-9]/, ' ', /[1-9]/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/ ];
+  cepMask = [ /[1-9]/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/ ];
+  //cepUnmask = /\D/g;
+  //foneUnmask = /\D/g;
+  cpfUnmask = /\D/g;
 
   form: FormGroup;
   sub: Subscription;

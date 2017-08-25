@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 
 import { Cliente } from './cliente';
 
-const apiURL = 'http://rest.learncode.academy/api/ederson/clientes';
+const apiURL = 'http://rest.learncode.academy/api/ederson/clientesteste';
 
 @Injectable()
 export class ClienteService {
