@@ -4,7 +4,10 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataTableModule } from 'angular2-datatable';
+import { TextMaskModule } from 'angular2-text-mask';
 
+import { UnmaskDirective } from '../../shared/directives/unmask.directive';
+import { CpfPipe } from '../../shared/pipes/cpf.pipe';
 import { ClienteFilterPipe } from './cliente.pipe';
 import { ClienteService } from './cliente.service';
 import { ClienteComponent } from './cliente.component';
@@ -18,12 +21,15 @@ import { ClienteRoutingModule } from './cliente.routing.module';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
+    TextMaskModule,
     ClienteRoutingModule
   ],
   declarations: [
     ClienteComponent,
     ClienteFilterPipe,
-    FormClienteComponent
+    FormClienteComponent,
+    UnmaskDirective,
+    CpfPipe
   ],
   providers: [
     ClienteService
