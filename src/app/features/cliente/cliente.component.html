@@ -41,7 +41,9 @@
                                     <td>{{ cliente.telefone }}</td>
                                     <td>{{ cliente.endereco?.logradouro }}</td>
                                     <td>
-                                        <a class="btn btn-default"><i style="color: green" class="fa fa-edit"></i></a>
+                                        <a [routerLink]="['/clientes', cliente.id, 'edit']" class="btn btn-default">
+                                            <i style="color: green" class="fa fa-edit"></i>
+                                        </a>
                                         <a class="btn btn-default"><i style="color: red" class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
