@@ -1,0 +1,113 @@
+<main id="content" class="content" role="main">
+  <!--h1 class="page-title">Cliente Form <small><small>works!</small></small></h1-->
+  <ol class="breadcrumb">
+      <li>HOME</li>
+      <li>CLIENTES</li>
+      <li class="active">EDITAR</li>
+  </ol>
+  <div class="row">
+    <div class="col-md-12">
+      <section class="widget">
+        <!--header>
+            <h5>
+                Inputs
+            </h5>
+            <div class="widget-controls">
+                <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
+                <a href="#"><i class="fa fa-refresh"></i></a>
+                <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+            </div>
+        </header-->
+        <div class="widget-body">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" role="form">
+            <fieldset>
+              <legend><strong>Dados pessoais</strong></legend>
+              <div class="row">
+                <!--div class="col-sm-12"-->
+                <div class="col-md-6 form-group">
+                  <label for="input-nome">Nome completo</label>
+                  <input formControlName="nome" type="text" class="form-control" id="input-nome"
+                  [ngClass]="erroStyle('nome')">
+                  <ul [hidden]="!isInvalidTouched('nome')" class="parsley-errors-list filled">
+                    <li>* Campo obrigatório</li>
+                  </ul>
+                </div>
+                <div class="col-md-3 form-group">
+                  <label for="input-cpf">CPF</label>
+                  <input formControlName="cpf" type="text" [textMask]="{mask: cpfMask}" [textUnmask]="cpfUnmask"
+                  class="form-control" id="input-cpf" [ngClass]="erroStyle('cpf')"
+                  placeholder="000.000.000-00">
+                  <ul [hidden]="!isInvalidTouched('cpf')" class="parsley-errors-list filled">
+                    <li>* Campo obrigatório</li>
+                  </ul>
+                </div>
+                <div class="col-md-3 form-group">
+                  <label for="input-telefone">Telefone</label>
+                  <input formControlName="telefone" type="text" [textMask]="{mask: foneMask}"
+                  class="form-control" id="input-telefone" [ngClass]="erroStyle('telefone')"
+                  placeholder="(00) 0 0000-0000">
+                  <ul [hidden]="!isInvalidTouched('telefone')" class="parsley-errors-list filled">
+                    <li>* Campo obrigatório</li>
+                  </ul>
+                </div>
+                <!--/div-->
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend><strong>Endereço</strong></legend>
+              <div formGroupName="endereco">
+                <div class="row">
+                <!--div class="col-sm-12"-->
+                  <div class="col-md-6 form-group">
+                    <label for="input-logradouro">Logradouro</label>
+                    <input formControlName="logradouro" type="text" class="form-control" id="input-logradouro"
+                    [ngClass]="erroStyle('endereco.logradouro')">
+                    <ul [hidden]="!isInvalidTouched('endereco.logradouro')" class="parsley-errors-list filled">
+                      <li>* Campo obrigatório</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-3 form-group">
+                    <label for="input-numero">Número</label>
+                    <input formControlName="numero" type="text" class="form-control" id="input-numero"
+                    [ngClass]="erroStyle('endereco.numero')">
+                    <ul [hidden]="!isInvalidTouched('endereco.numero')" class="parsley-errors-list filled">
+                      <li>* Campo obrigatório</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-3 form-group">
+                    <label for="input-cep">CEP</label>
+                    <input formControlName="cep" type="text" [textMask]="{mask: cepMask}"
+                    class="form-control" id="input-cep" [ngClass]="erroStyle('endereco.cep')"
+                    placeholder="00.000-000">
+                    <ul [hidden]="!isInvalidTouched('endereco.cep')" class="parsley-errors-list filled">
+                      <li>* Campo obrigatório</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <label for="input-bairro">Bairro</label>
+                    <input formControlName="bairro" type="text" class="form-control" id="input-bairro"
+                    [ngClass]="erroStyle('endereco.bairro')">
+                    <ul [hidden]="!isInvalidTouched('endereco.bairro')" class="parsley-errors-list filled">
+                      <li>* Campo obrigatório</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 form-group">
+                      <label for="input-complemento">Complemento</label>
+                      <input formControlName="complemento" type="text" class="form-control" id="input-complemento">
+                    </div>
+                <!--/div-->
+                </div>
+              </div>
+            </fieldset>
+            <div class="form-actions">
+              <button (click)="onCancel()" type="button" class="btn btn-default">Cancelar</button>
+              <button [disabled]="!form.valid" type="submit" class="btn btn-inverse">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>

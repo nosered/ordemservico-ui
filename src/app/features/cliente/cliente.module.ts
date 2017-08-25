@@ -13,6 +13,7 @@ import { ClienteService } from './cliente.service';
 import { ClienteComponent } from './cliente.component';
 import { FormClienteComponent } from './form-cliente/form-cliente.component';
 import { ClienteRoutingModule } from './cliente.routing.module';
+import { EditClienteComponent } from './edit-cliente/edit-cliente.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ClienteRoutingModule } from './cliente.routing.module';
     ClienteFilterPipe,
     FormClienteComponent,
     UnmaskDirective,
-    CpfPipe
+    CpfPipe,
+    EditClienteComponent
   ],
   providers: [
     ClienteService

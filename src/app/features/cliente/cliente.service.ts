@@ -19,4 +19,12 @@ export class ClienteService {
     add(cliente: Cliente): Observable<Cliente> {
         return this.http.post(apiURL, cliente).map(res => res.json());
     }
+
+    find(id: string): Observable<Cliente> {
+        return this.http.get(apiURL+'/'+id).map(res => res.json());
+    }
+
+    update(cliente: Cliente) {
+        return this.http.put(apiURL+'/'+cliente.id, cliente).map(res => res);
+    }
 }
