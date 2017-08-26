@@ -27,4 +27,8 @@ export class ClienteService {
     update(cliente: Cliente) {
         return this.http.put(apiURL+'/'+cliente.id, cliente).map(res => res);
     }
+
+    remove(id: string) {
+        return this.http.delete(apiURL+'/'+id).map(res => res);
+    }
 }

@@ -41,10 +41,20 @@
                                     <td>{{ cliente.telefone }}</td>
                                     <td>{{ cliente.endereco?.logradouro }}</td>
                                     <td>
-                                        <a [routerLink]="['/clientes', cliente.id, 'edit']" class="btn btn-default">
+                                        <a class="btn btn-default"
+                                        data-toggle="tooltip" data-placement="top" title="Ver detalhes">
+                                            <i style="color: blue" class="fa fa-eye"></i>
+                                        </a>
+                                        <a [routerLink]="['/clientes', cliente.id, 'edit']"
+                                        class="btn btn-default"
+                                        data-toggle="tooltip" data-placement="top" title="Atualizar">
                                             <i style="color: green" class="fa fa-edit"></i>
                                         </a>
-                                        <a class="btn btn-default"><i style="color: red" class="fa fa-times"></i></a>
+                                        <a (click)="showConfirmDialog(cliente)"
+                                        class="btn btn-default"
+                                        data-toggle="tooltip" data-placement="top" title="Remover">
+                                            <i style="color: red" class="fa fa-times"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>
