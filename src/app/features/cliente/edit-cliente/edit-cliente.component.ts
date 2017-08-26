@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { Cliente } from '../cliente';
 import { ClienteService } from '../cliente.service';
@@ -25,8 +26,12 @@ export class EditClienteComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastsManager,
+    private viewContainer: ViewContainerRef
+  ) {
+    this.toastr.setRootViewContainerRef(viewContainer);
+  }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -61,7 +66,7 @@ export class EditClienteComponent implements OnInit, OnDestroy {
         });
       },
       error => {
-        alert('Erro ao carregar informações do cliente');
+        this.showWarning();
       }
     );
   }
@@ -75,10 +80,10 @@ export class EditClienteComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.sub = this.clienteService.update(this.form.value).subscribe(
       cliente => {
-        alert('O cliente atualizado com sucesso.');
+        this.showSuccess();
       },
       error => {
-        alert('Erro ao tentar editar cliente');
+        this.showError();
       }
     );
   }
@@ -95,6 +100,18 @@ export class EditClienteComponent implements OnInit, OnDestroy {
     return {
       'parsley-error': this.isInvalidTouched(controlName)
     }
+  }
+
+  showSuccess() {
+    this.toastr.success('Os dados do cliente foram atualizados.','Concluído!');
+  }
+
+  showWarning() {
+    this.toastr.warning('Não foi possível carregar dados do cliente','Aviso!');
+  }
+
+  showError() {
+    this.toastr.error('Um erro ocorreu ao tentar atualizar dados.','Erro!');
   }
 
 }

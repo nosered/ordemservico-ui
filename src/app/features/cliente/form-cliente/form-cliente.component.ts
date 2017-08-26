@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { ClienteService } from '../cliente.service';
 
@@ -25,8 +26,12 @@ export class FormClienteComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private toastr: ToastsManager,
+    private viewContainer: ViewContainerRef
+  ) {
+    this.toastr.setRootViewContainerRef(this.viewContainer);
+  }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -53,10 +58,10 @@ export class FormClienteComponent implements OnInit, OnDestroy {
     this.sub = this.clienteService.add(this.form.value).subscribe(
       cliente => {
         this.form.reset();
-        alert(`O cliente ${cliente.nome} foi adicionado.`);
+        this.showSuccess();
       },
       error => {
-        alert('Erro ao tentar adicionar cliente');
+        this.showError();
       }
     );
   }
@@ -73,6 +78,14 @@ export class FormClienteComponent implements OnInit, OnDestroy {
     return {
       'parsley-error': this.isInvalidTouched(controlName)
     }
+  }
+
+  showSuccess() {
+    this.toastr.success('Cliente foi adicionado com sucesso.', 'Concluído!');
+  }
+
+  showError() {
+    this.toastr.error('Um erro ocorreu ao tentar adicionar cliente.', 'Erro!');
   }
 
 }
