@@ -1,0 +1,71 @@
+<main id="content" class="content" role="main">
+  <!--h1 class="page-title">Cliente Form <small><small>works!</small></small></h1-->
+  <ol class="breadcrumb">
+      <li>HOME</li>
+      <li>PEÇAS & SERVIÇOS</li>
+      <li class="active">ADICIONAR</li>
+  </ol>
+  <div class="row">
+    <div class="col-md-12">
+      <section class="widget">
+        <!--header>
+            <h5>
+                Inputs
+            </h5>
+            <div class="widget-controls">
+                <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
+                <a href="#"><i class="fa fa-refresh"></i></a>
+                <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+            </div>
+        </header-->
+        <div class="widget-body">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" role="form">
+            <fieldset>
+              <legend><strong>Informações sobre o item</strong></legend>
+              <div class="row">
+                <!--div class="col-sm-12"-->
+                <div class="col-md-6 form-group">
+                  <label for="input-descricao">Descrição</label>
+                  <input formControlName="descricao" type="text" class="form-control" id="input-descricao"
+                  [ngClass]="erroStyle('descricao')">
+                  <ul [hidden]="!isInvalidTouched('descricao')" class="parsley-errors-list filled">
+                    <li>* Campo obrigatório</li>
+                  </ul>
+                </div>
+                <div class="col-md-3 form-group">
+                  <label for="input-valor">Valor</label>
+                  <input formControlName="valor" type="text"
+                  currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                  class="form-control" id="input-valor" [ngClass]="erroStyle('valor')"
+                  placeholder="R$ 0,00">
+                  <ul [hidden]="!isInvalidTouched('valor')" class="parsley-errors-list filled">
+                    <li>* Campo obrigatório</li>
+                  </ul>
+                </div>
+                <div class="col-md-3 form-group">
+                  <label for="input-tipo">Tipo</label>
+                  <div [ngStyle]="selectErroStyle('tipo')">
+                  <select formControlName="tipo"
+                  class="form-control" id="input-tipo"
+                  placeholder="Escolha um tipo">
+                    <option value="PECA">PEÇA</option>
+                    <option value="SERVICO">SERVIÇO</option>
+                  </select>
+                  </div>
+                  <ul [hidden]="!isInvalidTouched('tipo')" class="parsley-errors-list filled">
+                    <li>* Campo obrigatório</li>
+                  </ul>
+                </div>
+                <!--/div-->
+              </div>
+            </fieldset>
+            <div class="form-actions">
+              <button (click)="onCancel()" type="button" class="btn btn-default">Cancelar</button>
+              <button [disabled]="!form.valid" type="submit" class="btn btn-inverse">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
