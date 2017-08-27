@@ -12,6 +12,7 @@ import { ItemService } from './item.service';
 import { ItemFilterPipe } from './item-filter.pipe';
 import { FormItemComponent } from './form-item/form-item.component';
 import { ItemRoutingModule } from './item.routing.module';
+import { EditItemComponent } from './edit-item/edit-item.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ItemRoutingModule } from './item.routing.module';
   declarations: [
     ItemComponent,
     ItemFilterPipe,
-    FormItemComponent
+    FormItemComponent,
+    EditItemComponent
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR'},
