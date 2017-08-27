@@ -19,4 +19,12 @@ export class ItemService {
     list(): Observable<Item[]> {
         return this.http.get(apiURL).map(res => res.json());
     }
+
+    find(id: string): Observable<Item> {
+        return this.http.get(apiURL+'/'+id).map(res => res.json());
+    }
+
+    update(item: Item) {
+        return this.http.put(apiURL+'/'+item.id, item).map(res => res);
+    }
 }

@@ -39,7 +39,8 @@
                 <td>{{ item.tipo }}</td>
                 <td>{{ item.valor | currency:'BRL':true:'1.2-2' }}</td>
                 <td>
-                  <a class="btn btn-default"
+                  <a [routerLink]="['/itens', item.id, 'edit']"
+                  class="btn btn-default"
                   data-toggle="tooltip" data-placement="top" title="Atualizar">
                     <i style="color: green" class="fa fa-edit"></i>
                   </a>
