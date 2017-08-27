@@ -1,6 +1,65 @@
 <main id="content" class="content" role="main">
   <ol class="breadcrumb">
     <li>HOME</li>
-    <li class="active">ITENS</li>
+    <li class="active">PEÇAS & SERVIÇOS</li>
   </ol>
+  <div class="row">
+    <div class="col-md-12">
+      <section class="widget">
+        <header>
+          <h4>
+            Lista de <span class="fw-semi-bold">Peças & Serviços</span>
+          </h4>
+          <div class="widget-controls">
+            <div class="input-group" style="width: 500px;">
+              <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+              <input type="text" [(ngModel)]="filterQuery" class="form-control pull-right" placeholder="Filtrar item por descrição">
+            </div>
+          </div>
+        </header>
+        <div class="widget-body">
+          <table class="table table-bordered table-hover"
+          [mfData]="data | itemFilter : filterQuery"
+          #mf="mfDataTable"
+          [mfRowsOnPage]="5">
+            <thead>
+              <tr>
+                <th class="text-center" style="width: 59%">
+                  <mfDefaultSorter by="descricao">Descrição</mfDefaultSorter>
+                </th>
+                <th class="text-center" style="width: 15%">Tipo</th>
+                <th class="text-center" style="width: 15%">Valor</th>
+                <th class="text-center" style="width: 11%">Ações</th>
+              </tr>
+            </thead>
+            <tbody class="panel-group mb-lg" id="accordion" data-toggle="collapse">
+              <tr *ngFor="let item of mf.data"
+              class="panel panel-default">
+                <td>{{ item.descricao }}</td>
+                <td>{{ item.tipo }}</td>
+                <td>{{ item.valor | currency:'BRL':true:'1.2-2' }}</td>
+                <td>
+                  <a class="btn btn-default"
+                  data-toggle="tooltip" data-placement="top" title="Atualizar">
+                    <i style="color: green" class="fa fa-edit"></i>
+                  </a>
+                  <a class="btn btn-default"
+                  data-toggle="tooltip" data-placement="top" title="Remover">
+                    <i style="color: red" class="fa fa-times"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4">
+                  <mfBootstrapPaginator></mfBootstrapPaginator>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
 </main>

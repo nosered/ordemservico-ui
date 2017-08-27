@@ -15,4 +15,8 @@ export class ItemService {
     add(item: Item): Observable<Item> {
         return this.http.post(apiURL, item).map(res => res.json());
     }
+
+    list(): Observable<Item[]> {
+        return this.http.get(apiURL).map(res => res.json());
+    }
 }
