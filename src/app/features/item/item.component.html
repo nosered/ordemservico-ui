@@ -44,7 +44,8 @@
                   data-toggle="tooltip" data-placement="top" title="Atualizar">
                     <i style="color: green" class="fa fa-edit"></i>
                   </a>
-                  <a class="btn btn-default"
+                  <a (click)="showConfirmDialog(item)"
+                  class="btn btn-default"
                   data-toggle="tooltip" data-placement="top" title="Remover">
                     <i style="color: red" class="fa fa-times"></i>
                   </a>
