@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { ItemService } from '../item.service';
 
@@ -20,8 +21,12 @@ export class EditItemComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private itemService: ItemService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router,
+    private toastr: ToastsManager,
+    private viewContainer: ViewContainerRef
+  ) {
+    this.toastr.setRootViewContainerRef(this.viewContainer);
+  }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -41,7 +46,7 @@ export class EditItemComponent implements OnInit, OnDestroy {
           valor: item.valor
         });
       },
-      error => alert('Erro ao carregar informações do item.')
+      error => this.showAlerta()
     );
   }
 
@@ -57,10 +62,10 @@ export class EditItemComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.subUpdate = this.itemService.update(this.form.value).subscribe(
       success => {
-        alert('Informações atualizadas com sucesso');
+        this.showSuccess();
       },
       error => {
-        alert('Erro ao tentar salvar alterações');
+        this.showErro();
       }
     );
   }
@@ -86,6 +91,18 @@ export class EditItemComponent implements OnInit, OnDestroy {
         'border-radius': '3px'
       }
     }
+  }
+
+  showSuccess() {
+    this.toastr.success('As informações foram atualizadas.','Sucesso!');
+  }
+
+  showAlerta() {
+    this.toastr.warning('Não foi possível carregar informações do item','Atenção!');
+  }
+
+  showErro() {
+    this.toastr.error('Erro ao tentar atualizar informações.','Erro!');
   }
 
 }

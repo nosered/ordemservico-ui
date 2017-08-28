@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs/Rx';
 import { DialogService } from 'ng2-bootstrap-modal';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { Item } from './item';
 import { ItemService } from './item.service';
@@ -19,8 +20,12 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   constructor(
     private itemService: ItemService,
-    private dialogService: DialogService
-  ) { }
+    private dialogService: DialogService,
+    private toastr: ToastsManager,
+    private viewContainer: ViewContainerRef
+  ) {
+    this.toastr.setRootViewContainerRef(this.viewContainer);
+  }
 
   ngOnInit() {
     this.list();
@@ -35,7 +40,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   list() {
     this.sub = this.itemService.list().subscribe(
       itens => this.data = itens,
-      error => alert('Erro ao carregar lista de itens')
+      error => this.showAlert()
     );
   }
 
@@ -61,11 +66,23 @@ export class ItemComponent implements OnInit, OnDestroy {
       () => {
         let index = this.data.indexOf(item);
         this.data.splice(index, 1);
-        alert('Item removido com sucesso.');
+        this.showSuccess();
       },
       () => {
-        alert('Erro ao tentar remover item.');
+        this.showError();
       }
     );
+  }
+
+  showSuccess() {
+    this.toastr.success('Item foi removido.','Sucesso!');
+  }
+
+  showAlert() {
+    this.toastr.warning('Não foi possível carregar a lista de itens.','Atenção!');
+  }
+
+  showError() {
+    this.toastr.error('Erro ao tentar remover o item.','Erro!');
   }
 }
