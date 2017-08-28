@@ -27,4 +27,8 @@ export class ItemService {
     update(item: Item) {
         return this.http.put(apiURL+'/'+item.id, item).map(res => res);
     }
+
+    remove(id: string) {
+        return this.http.delete(apiURL+'/'+id).map(res => res);
+    }
 }
